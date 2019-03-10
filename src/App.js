@@ -1,28 +1,37 @@
-import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from 'react';
+import { connect } from 'react-redux';
+import CssBaseline from '@material-ui/core/CssBaseline';
+import Grid from '@material-ui/core/Grid';
+import { withStyles } from '@material-ui/core/styles';
 
-class App extends Component {
-  render() {
-    return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
-      </div>
-    );
-  }
+import TopBar from './TopBar';
+import Form from './Form';
+import Chat from './Chat';
+
+const styles = theme => ({
+  root: {
+    flexGrow: 1,
+  },
+});
+
+function App({classes, isAuthenticated}) {
+  return (
+    <React.Fragment>
+      <CssBaseline />
+      <TopBar />
+      <main className={classes.root}>
+        <Grid container spacing={24} justify="center" alignItems="center">
+          {isAuthenticated
+            ? <Chat />
+            : <Form /> }
+        </Grid>
+      </main>
+    </React.Fragment>
+  );
 }
 
-export default App;
+function mapStateToProps(state) {
+  return {isAuthenticated: state.isAuthenticated};
+}
+
+export default connect(mapStateToProps)(withStyles(styles)(App));
