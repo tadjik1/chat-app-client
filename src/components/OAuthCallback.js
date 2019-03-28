@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { Redirect, Link } from 'react-router-dom';
-import { oauthCallback } from './actions/auth';
+import { oauthCallback } from '../store/actions';
 
 const providerMap = {
   vkontakte: 'VK',
@@ -24,22 +24,21 @@ function OAuthCallback({token, oauthCallback, oauthCallbackAction, match, locati
     <main className="container">
       <div className="row login-form justify-content-center align-items-center">
         <div className="col col-md-6">
-          <div className="card-header">
-            <h3>Логин через {providerMap[provider]}</h3>
-          </div>
-          <div className="card-body">
+          <div className="text-center border border-light p-5">
+            <p className="h4 mb-4">Логин через {providerMap[provider]}</p>
+  
             {oauthCallback.error || params.get('error')
               ? <React.Fragment>
-                  <p className="text-danger">При выполнени операции произошла ошибка.</p>
-                  <p className="text-danger">{oauthCallback.error || ""}</p>
-                  <Link to="/">Sign In</Link>
-                </React.Fragment>
+                <p className="text-danger">При выполнени операции произошла ошибка.</p>
+                <p className="text-danger">{oauthCallback.error || ""}</p>
+                <Link to="/">Sign In</Link>
+              </React.Fragment>
               : <React.Fragment>
-                  <p>Пожалуйста, подождите.</p>
-                  <div className="spinner-border" role="status">
-                    <span className="sr-only">Loading...</span>
-                  </div>
-                </React.Fragment>
+                <p>Пожалуйста, подождите.</p>
+                <div className="spinner-border" role="status">
+                  <span className="sr-only">Loading...</span>
+                </div>
+              </React.Fragment>
             }
           </div>
         </div>

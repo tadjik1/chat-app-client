@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { Redirect, Link } from 'react-router-dom';
-import { confirm } from './actions/auth';
+import { confirm } from '../store/actions';
 
 function Confirm({token, confirmation, confirmAction, match}) {
   if (token) return <Redirect to="/" />;
@@ -14,22 +14,21 @@ function Confirm({token, confirmation, confirmAction, match}) {
     <main className="container">
       <div className="row login-form justify-content-center align-items-center">
         <div className="col col-md-6">
-          <div className="card-header">
-            <h3>Подтверждение почтового адреса</h3>
-          </div>
-          <div className="card-body">
+          <div className="text-center border border-light p-5">
+            <p className="h4 mb-4">Подтверждение почтового адреса</p>
+  
             {confirmation.error
               ? <React.Fragment>
-                  <p className="text-danger">При выполнени операции произошла ошибка.</p>
-                  <p className="text-danger">{confirmation.error}</p>
-                  <Link to="/">Sign In</Link>
-                </React.Fragment>
+                <p className="text-danger">При выполнени операции произошла ошибка.</p>
+                <p className="text-danger">{confirmation.error}</p>
+                <Link to="/">Sign In</Link>
+              </React.Fragment>
               : <React.Fragment>
-                  <p>Почтовый адрес подтверждается, пожалуйста, подождите.</p>
-                  <div className="spinner-border" role="status">
-                    <span className="sr-only">Loading...</span>
-                  </div>
-                </React.Fragment>
+                <p>Почтовый адрес подтверждается, пожалуйста, подождите.</p>
+                <div className="spinner-border" role="status">
+                  <span className="sr-only">Loading...</span>
+                </div>
+              </React.Fragment>
             }
           </div>
         </div>

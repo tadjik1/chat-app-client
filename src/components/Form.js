@@ -1,8 +1,6 @@
 import React, { useState } from 'react';
 import SocialButtons from './SocialButtons';
 
-import './form.css';
-
 export default function Form(props) {
   const [state, changeState] = useState({});
   
@@ -15,9 +13,66 @@ export default function Form(props) {
   
   return (
     <main className="container">
-      <div className="row login-form justify-content-center align-items-center">
+      <div className="row justify-content-center align-items-center">
         <div className="col col-md-6">
-          <div className="card-header">
+          <form
+            onSubmit={(event) => props.onSubmit(event, state)}
+            className="text-center border border-light p-5"
+            noValidate>
+            
+            <p className="h4 mb-4">{props.title}</p>
+            
+            {props.error && <p className="text-left text-danger">{props.error}</p>}
+  
+            {props.fields.map(field => {
+              let inputClassname = "form-control";
+              if (props.errors) {
+                if (props.errors[field.name]) {
+                  inputClassname += " is-invalid";
+                } else {
+                  inputClassname += " is-valid";
+                }
+              }
+    
+              return (
+                <div className="form-row mb-4">
+                  <input
+                    value={state[field.name] || ""}
+                    onChange={setValue}
+                    type={field.type}
+                    name={field.name}
+                    required
+                    className={inputClassname}
+                    disabled={props.disabled}
+                    placeholder={field.placeholder} />
+                  {(props.errors && props.errors[field.name]) && (
+                    <div className="invalid-feedback text-left">
+                      {props.errors[field.name]}
+                    </div>
+                  )}
+                </div>
+              );
+            })}
+
+            <button
+              disabled={props.disabled}
+              className="btn btn-info btn-block my-4"
+              type="submit">{props.button}</button>
+  
+            <props.Footer />
+    
+            <SocialButtons />
+  
+          </form>
+
+        </div>
+      </div>
+    </main>
+  );
+}
+
+/*
+* <div className="card-header">
             <h3>{props.title}</h3>
             <SocialButtons />
           </div>
@@ -70,7 +125,5 @@ export default function Form(props) {
             <props.Footer />
           </div>
         </div>
-      </div>
-    </main>
-  );
-}
+*
+* */

@@ -5,12 +5,12 @@ import { BrowserRouter, Route } from 'react-router-dom';
 
 import * as serviceWorker from './serviceWorker';
 import store from './store';
-import Home from './Home';
-import Login from './Login';
-import Register from './Register';
-import Registered from './Registered';
-import Confirm from './Confirm';
-import OAuthCallback from './OAuthCallback';
+import Home from './components/Home';
+import Login from './components/Login';
+import Register from './components/Register';
+import Registered from './components/Registered';
+import Confirm from './components/Confirm';
+import OAuthCallback from './components/OAuthCallback';
 
 ReactDOM.render(
   <Provider store={store}>

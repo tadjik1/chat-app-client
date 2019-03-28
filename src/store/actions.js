@@ -88,3 +88,25 @@ export function oauthCallback({provider, code}) {
     });
   }
 }
+
+export const FetchMessagesRequest = Symbol('FetchMessagesRequest');
+export const FetchMessagesSuccess = Symbol('FetchMessagesSuccess');
+
+export function fetchMessages() {
+  return (dispatch, getState) => {
+    dispatch({type: FetchMessagesRequest});
+    
+    const state = getState();
+    const token = state.token;
+    
+    client.get('/api/messages', {
+      params: {
+        token
+      }
+    }).then(response => {
+      dispatch({type: FetchMessagesSuccess, messages: response.data.messages});
+    }).catch(error => {
+      console.error(error.response.data);
+    });
+  }
+}

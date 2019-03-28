@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { Link, Redirect } from 'react-router-dom';
 
 import Form from './Form';
-import { register } from './actions/auth';
+import { register } from '../store/actions';
 
 const fields = [
   {type: 'email', name: 'email', placeholder: 'email', icon: 'fa-at'},
@@ -31,12 +31,9 @@ function Register({registration, registerAction}) {
       fields={fields}
       button="Create an account"
       Footer={() => (
-        <React.Fragment>
-          <div className="row justify-content-center links">
-            <span>Already have an account?</span>
-            <Link to="/login">Sign In</Link>
-          </div>
-        </React.Fragment>
+        <p>Already have an account?&nbsp;
+          <Link to="/login">Sign In</Link>
+        </p>
       )} />
   );
 }

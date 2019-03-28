@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { Link, Redirect } from 'react-router-dom';
 
 import Form from './Form';
-import { login } from './actions/auth';
+import { login } from '../store/actions';
 
 const fields = [
   {type: 'email', name: 'email', placeholder: 'email', icon: 'fa-at'},
@@ -30,10 +30,9 @@ function Login({token, login, loginAction}) {
       fields={fields}
       button="Login"
       Footer={() => (
-        <div className="row justify-content-center links">
-          <span>Don't have an account?</span>
+        <p>Not a member?&nbsp;
           <Link to="/register">Sign Up</Link>
-        </div>
+        </p>
       )} />
   );
 }
