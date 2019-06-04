@@ -1,18 +1,33 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Link, Redirect } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 import Form from './Form';
 import { register } from '../store/actions';
 
 const fields = [
   {type: 'email', name: 'email', placeholder: 'email', icon: 'fa-at'},
-  {type: 'text', name: 'name', placeholder: 'name', icon: 'fa-user'},
-  {type: 'password', name: 'password', placeholder: 'password', icon: 'fa-key'},
+  {type: 'text', name: 'displayName', placeholder: 'имя', icon: 'fa-user'},
+  {type: 'password', name: 'password', placeholder: 'пароль', icon: 'fa-key'},
 ];
 
 function Register({registration, registerAction}) {
-  if (registration.complete) return <Redirect to="/registered" />;
+  if (registration.complete) {
+    return (
+      <main className="container">
+        <div className="row login-form justify-content-center align-items-center">
+          <div className="col col-md-6">
+            <div className="text-center border border-light p-5">
+              <p className="h4 mb-4">Поздравляем, вы зарегистрированы!</p>
+              
+              <p>На указанную вами почту отправлено письмо.</p>
+              <p>Для завершения регистрации, пожалуйста, перейдите по ссылке из этого письма.</p>
+            </div>
+          </div>
+        </div>
+      </main>
+    );
+  }
   
   function onSubmit(event, fields) {
     event.preventDefault();
@@ -24,15 +39,15 @@ function Register({registration, registerAction}) {
   return (
     <Form
       disabled={registration.processing}
-      title="Sign Up"
+      title="Регистрация"
       validated={registration.errors}
       errors={registration.errors}
       onSubmit={onSubmit}
       fields={fields}
-      button="Create an account"
+      button="Создать аккаунт"
       Footer={() => (
-        <p>Already have an account?&nbsp;
-          <Link to="/login">Sign In</Link>
+        <p>Уже есть аккаунт?&nbsp;
+          <Link to="/login">Вход</Link>
         </p>
       )} />
   );

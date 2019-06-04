@@ -13,9 +13,14 @@ import {
   RegisterFailure,
   RegisterRequest,
   RegisterSuccess,
-  FetchMessagesSuccess, FetchMessagesRequest
+  FetchMessagesSuccess, 
+  FetchMessagesRequest,
+  FetchMessagesFailure,
+  FetchMeRequest,
+  FetchMeSuccess,
+  FetchMeFailure,
 } from './actions';
-import {WebsocketConnected, WebsocketDisconnected} from '../components/Chat';
+import {WebsocketConnected, WebsocketDisconnected, NewMessage} from '../components/Chat';
 
 const token = localStorage.getItem('token') || null;
 
@@ -44,8 +49,12 @@ const initialState = {
   },
   isWebsocketConnected: false,
   messages: {
-    fetching: true,
+    fetching: false,
     list: []
+  },
+  me: {
+    data: {},
+    fetching: false,
   }
 };
 
@@ -131,14 +140,58 @@ export default function reducer(state = initialState, action) {
         ...state,
         messages: {
           ...state.messages,
-          list: action.messages.concat(state.messages),
+          list: action.messages.concat(state.messages.list),
           fetching: false
+        }
+      };
+    case FetchMessagesFailure:
+      return {
+        ...state,
+        messages: {
+          ...state.messages,
+          fetching: false,
+        }
+      };
+    case FetchMeRequest:
+      return {
+        ...state,
+        me: {
+          ...state.me,
+          data: {},
+          fetching: true,
+        }
+      };
+    case FetchMeSuccess:
+      return {
+        ...state,
+        me: {
+          ...state.me,
+          data: action.data,
+          fetching: false,
+        }
+      };
+    case FetchMeFailure:
+      return {
+        ...state,
+        me: {
+          ...state.me,
+          data: {},
+          fetching: false,
         }
       };
     case WebsocketConnected:
       return { ...state, isWebsocketConnected: true };
     case WebsocketDisconnected:
       return { ...state, isWebsocketConnected: false };
+    case NewMessage:
+      return {
+        ...state,
+        messages: {
+          ...state.messages,
+          list: state.messages.list.concat(action.message),
+          fetching: false
+        }
+      };
     default:
       return state;
   }

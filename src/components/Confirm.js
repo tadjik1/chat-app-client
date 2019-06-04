@@ -21,12 +21,12 @@ function Confirm({token, confirmation, confirmAction, match}) {
               ? <React.Fragment>
                 <p className="text-danger">При выполнени операции произошла ошибка.</p>
                 <p className="text-danger">{confirmation.error}</p>
-                <Link to="/">Sign In</Link>
+                <Link to="/">Вход</Link>
               </React.Fragment>
               : <React.Fragment>
                 <p>Почтовый адрес подтверждается, пожалуйста, подождите.</p>
                 <div className="spinner-border" role="status">
-                  <span className="sr-only">Loading...</span>
+                  <span className="sr-only">Загрузка...</span>
                 </div>
               </React.Fragment>
             }

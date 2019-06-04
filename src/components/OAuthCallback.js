@@ -31,12 +31,12 @@ function OAuthCallback({token, oauthCallback, oauthCallbackAction, match, locati
               ? <React.Fragment>
                 <p className="text-danger">При выполнени операции произошла ошибка.</p>
                 <p className="text-danger">{oauthCallback.error || ""}</p>
-                <Link to="/">Sign In</Link>
+                <Link to="/">Вход</Link>
               </React.Fragment>
               : <React.Fragment>
                 <p>Пожалуйста, подождите.</p>
                 <div className="spinner-border" role="status">
-                  <span className="sr-only">Loading...</span>
+                  <span className="sr-only">Загрузка...</span>
                 </div>
               </React.Fragment>
             }

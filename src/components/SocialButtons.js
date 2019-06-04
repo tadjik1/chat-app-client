@@ -8,8 +8,8 @@ function SocialButtons({ oauth, oauthAction }) {
   }
 
   return (
-    <React.Fragment>
-      <p>or use social networks:</p>
+    <div className="text-center">
+      <p>или используйте социальные сети:</p>
       
       <button className="btn btn-link btn-lg text-info mx-2" onClick={getOAuthLink('facebook')}>
         <i className="fab fa-facebook-f"/>
@@ -20,7 +20,7 @@ function SocialButtons({ oauth, oauthAction }) {
       <button className="btn btn-link btn-lg text-info mx-2" onClick={getOAuthLink('github')}>
         <i className="fab fa-github"/>
       </button>
-    </React.Fragment>
+    </div>
   );
 }
 

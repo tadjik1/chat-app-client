@@ -1,13 +1,13 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Link, Redirect } from 'react-router-dom';
+import { Redirect, Link } from 'react-router-dom';
 
 import Form from './Form';
 import { login } from '../store/actions';
 
 const fields = [
   {type: 'email', name: 'email', placeholder: 'email', icon: 'fa-at'},
-  {type: 'password', name: 'password', placeholder: 'password', icon: 'fa-key'},
+  {type: 'password', name: 'password', placeholder: 'пароль', icon: 'fa-key'},
 ];
 
 function Login({token, login, loginAction}) {
@@ -23,15 +23,15 @@ function Login({token, login, loginAction}) {
   return (
     <Form
       disabled={login.processing}
-      title="Sign In"
+      title="Вход"
       validated={login.errors}
       error={login.error}
       onSubmit={onSubmit}
       fields={fields}
-      button="Login"
+      button="Войти"
       Footer={() => (
-        <p>Not a member?&nbsp;
-          <Link to="/register">Sign Up</Link>
+        <p>Еще нет аккаунта?&nbsp;
+          <Link to="/register">Регистрация</Link>
         </p>
       )} />
   );

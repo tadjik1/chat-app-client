@@ -7,20 +7,18 @@ import * as serviceWorker from './serviceWorker';
 import store from './store';
 import Home from './components/Home';
 import Login from './components/Login';
-import Register from './components/Register';
-import Registered from './components/Registered';
-import Confirm from './components/Confirm';
 import OAuthCallback from './components/OAuthCallback';
+import Register from './components/Register';
+import Confirm from './components/Confirm';
 
 ReactDOM.render(
   <Provider store={store}>
     <BrowserRouter>
       <Route exact path="/" component={Home} />
       <Route path="/login" component={Login} />
-      <Route path="/register" component={Register} />
-      <Route path="/registered" component={Registered} />
-      <Route path="/confirm/:verificationToken" component={Confirm} />
       <Route path="/oauth/:provider" component={OAuthCallback} />
+      <Route path="/register" component={Register} />
+      <Route path="/confirm/:verificationToken" component={Confirm} />
     </BrowserRouter>
   </Provider>,
   document.getElementById('root')
